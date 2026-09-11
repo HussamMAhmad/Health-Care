@@ -1,7 +1,5 @@
 import Image from "next/image";
-import logo from "@/public/assets/icons/logo-full.svg";
 import PatientForm from "@/components/forms/patientForm";
-import patienImg from "@/public/assets/images/onboarding-img.png";
 import Link from "next/link";
 
 export default function Home() {
@@ -10,7 +8,7 @@ export default function Home() {
       <section className="remove-scrollbar container my-auto">
         <div>
           <Image
-            src={logo}
+            src="/assets/icons/logo-full.svg"
             alt="patient"
             width={1000}
             height={1000}
@@ -26,7 +24,7 @@ export default function Home() {
         </div>
       </section>
       <Image
-        src={patienImg}
+        src="/assets/images/onboarding-img.png"
         alt="patient"
         width={1000}
         height={1000}
