@@ -1,0 +1,34 @@
+import Image from "next/image";
+import React from "react";
+import RigisterForm from "@/components/forms/registerForm";
+import { getUser } from "@/lib/actions/patient.actions";
+
+async function Register({ params }: { params: Promise<{ userId: string }> }) {
+  const { userId } = await params;
+  const user = await getUser(userId);
+  return (
+    <div className="flex h-screen max-h-screen">
+      <section className="remove-scrollbar container overflow-y-auto">
+        <div className="sub-container max-w-[860px] h-fit flex-col py-10 ">
+          <Image
+            src="/assets/icons/logo-full.svg"
+            alt="patient"
+            width={1000}
+            height={1000}
+            className="mb-12 h-10 w-fit"
+          />
+          <RigisterForm user={user} />
+        </div>
+      </section>
+      <Image
+        src="/assets/images/register-img.png"
+        alt="patient"
+        width={1000}
+        height={1000}
+        className="side-img max-w-[390px] max-h-screen "
+      />
+    </div>
+  );
+}
+
+export default Register;

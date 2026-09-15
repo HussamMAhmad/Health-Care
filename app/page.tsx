@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import PatientForm from "@/components/forms/patientForm";
 import Link from "next/link";

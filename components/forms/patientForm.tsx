@@ -6,8 +6,9 @@ import * as z from "zod";
 import { FieldGroup } from "@/components/ui/field";
 import CustomeInput from "../ui/CustomeInput";
 import SubmitButton from "../ui/SubmitButton";
-import { formSchema } from "@/lib/validation";
+import { UserFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.actions";
 
 export enum FormFieldType {
   INPUT = "Input",
@@ -20,10 +21,10 @@ export enum FormFieldType {
 }
 
 function PatientForm() {
-  const router = useRouter;
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof UserFormValidation>>({
+    resolver: zodResolver(UserFormValidation),
     defaultValues: {
       name: "",
       email: "",
@@ -31,12 +32,13 @@ function PatientForm() {
     },
   });
 
-  async function onSubmit({ name, email, phone }: z.infer<typeof formSchema>) {
+  async function onSubmit({ name, email, phone }: z.infer<typeof UserFormValidation>) {
     setIsLoading(true);
     try {
-    //   const useData = { name, email, phone };
-    //   const user = await createUser(userData);
-    //   if (user) router.push(`/patients/${user.$id}/register`);
+      const userData = { name, email, phone };
+      const user = await createUser(userData);
+      if (user) router.push(`/patients/${user.$id}/register`);
+      setIsLoading(false);
     } catch (e) {
       console.log(e);
     }
