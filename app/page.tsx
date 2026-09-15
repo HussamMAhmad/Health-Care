@@ -1,11 +1,19 @@
-"use client";
 import Image from "next/image";
 import PatientForm from "@/components/forms/patientForm";
 import Link from "next/link";
+import PassKeyModel from "@/components/PassKeyModel";
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const isAdmin = (await searchParams)?.admin === "true";
   return (
     <div className="flex h-screen max-h-screen">
+      {isAdmin && (
+        <PassKeyModel/>
+      )}
       <section className="remove-scrollbar container my-auto">
         <div>
           <Image

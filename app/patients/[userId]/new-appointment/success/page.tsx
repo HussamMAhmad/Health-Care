@@ -73,7 +73,7 @@ async function Success({
         <Button variant="outline" className="shad-primary-btn" asChild>
           <Link href={`/patients/${userId}/new-appointment`}>
             New Appointment
-          </Link>
+          </Link> 
         </Button>
         <p className="copyright">© 2026 CarePulse</p>
       </div>
