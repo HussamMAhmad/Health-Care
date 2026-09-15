@@ -11,7 +11,6 @@ import { Doctors } from "@/constants";
 import Image from "next/image";
 import { SelectItem } from "@/components/ui/select";
 import {
-  CreateAppointmentSchema,
   getAppointmentSchema,
 } from "@/lib/validation";
 import { CreateAppointment } from "@/lib/actions/appointment.actions";

@@ -80,11 +80,6 @@ export async function registerPatient({
       });
     }
 
-    console.log({
-      identificationDocumentId: file?.$id || null,
-      identificationDocumentUrl: `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view?project=${PROJECT_ID}`,
-    });
-
     const result = await tablesDB.createRow({
       databaseId: DATABASE_ID!,
       tableId: PATIENT_ID!,

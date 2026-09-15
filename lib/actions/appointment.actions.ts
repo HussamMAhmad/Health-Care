@@ -1,7 +1,7 @@
 "use server";
 import { tablesDB } from "../appwrite.config";
 import { DATABASE_ID, APPOINTMENT } from "../appwrite.config";
-import { ID } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
 
 export async function CreateAppointment(
@@ -19,5 +19,18 @@ export async function CreateAppointment(
     return parseStringify(result);
   } catch (e) {
     console.error("failed to create appointment", e);
+  }
+}
+
+export async function getAppointment(appointmentId: string) {
+  try {
+    const result = await tablesDB.listRows({
+      databaseId: DATABASE_ID!,
+      tableId: APPOINTMENT!,
+      queries: [Query.equal("$id", appointmentId)],
+    });
+    return parseStringify(result);
+  } catch (e) {
+    console.error("failed to fetch appointment data", e);
   }
 }
