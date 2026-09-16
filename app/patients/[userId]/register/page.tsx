@@ -2,10 +2,13 @@ import Image from "next/image";
 import React from "react";
 import RigisterForm from "@/components/forms/registerForm";
 import { getUser } from "@/lib/actions/patient.actions";
+import * as Sentry from "@sentry/nextjs";
 
 async function Register({ params }: { params: Promise<{ userId: string }> }) {
   const { userId } = await params;
   const user = await getUser(userId);
+  Sentry.metrics.count("user_view_register", 1);
+  Sentry.metrics.distribution("api_response_time", 150);
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container overflow-y-auto">

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import AppointmentForm from "@/components/forms/AppointmentForm";
 import { getPaitent } from "@/lib/actions/patient.actions";
+import * as Sentry from "@sentry/nextjs";
 
 export default async function NewAppointment({
   params,
@@ -9,6 +10,8 @@ export default async function NewAppointment({
 }) {
   const { userId } = await params;
   const paitentId = await getPaitent(userId);
+  Sentry.metrics.count("user_view_new-appointment", paitentId.name);
+  Sentry.metrics.distribution("api_response_time", 150);
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container my-auto">

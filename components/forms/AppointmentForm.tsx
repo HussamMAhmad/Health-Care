@@ -14,7 +14,6 @@ import { getAppointmentSchema } from "@/lib/validation";
 import { CreateAppointment } from "@/lib/actions/appointment.actions";
 import { Appointment } from "@/types/appwrite.types";
 import { updateAppointment } from "@/lib/actions/appointment.actions";
-import { formatDateTime } from "@/lib/utils";
 
 function AppointmentForm({
   userId,
@@ -91,7 +90,6 @@ function AppointmentForm({
           type,
         };
         const updatedAppointment = await updateAppointment(appointmentToUpdate);
-
         if (updatedAppointment) {
           setOpen && setOpen(false);
           form.reset();

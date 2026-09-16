@@ -5,6 +5,8 @@ import { getAppointment } from "@/lib/actions/appointment.actions";
 import { Doctors } from "@/constants";
 import { formatDateTime } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import * as Sentry from "@sentry/nextjs";
+import { getUser } from "@/lib/actions/patient.actions";
 
 async function Success({
   params,
@@ -16,6 +18,9 @@ async function Success({
   const { userId } = await params;
   const appointmentId = (await searchParams)?.appointmentId as string;
   const Doc = await getAppointment(appointmentId);
+  const user = await getUser(userId);
+  Sentry.metrics.count("user_view_new-appointment-success", user.name);
+  Sentry.metrics.distribution("api_response_time", 150);
   return (
     <div className="max-h-screen h-screen flex px-[5%]">
       <div className="success-img">
@@ -73,7 +78,7 @@ async function Success({
         <Button variant="outline" className="shad-primary-btn" asChild>
           <Link href={`/patients/${userId}/new-appointment`}>
             New Appointment
-          </Link> 
+          </Link>
         </Button>
         <p className="copyright">© 2026 CarePulse</p>
       </div>
