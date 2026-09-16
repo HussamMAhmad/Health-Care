@@ -19,16 +19,17 @@ export async function createUser(userData: CreateUserParams) {
       phone: userData.phone,
       name: userData.name,
     });
-    console.log(result);
+    console.log(parseStringify(result));
     return parseStringify(result);
   } catch (e: any) {
     if (e && e.code === 409) {
       const result = await users.list({
-        queries: [],
-        search: userData.email,
-        total: false,
+        queries: [Query.equal("email", [userData.email])],
       });
-      return result.users[0];
+      console.log("error in result from create user:", result);
+      if (result?.users?.length > 0) {
+        return parseStringify(result.users[0]);
+      }
     }
     console.error("Error creating user:", e);
     throw e;

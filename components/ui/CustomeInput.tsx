@@ -14,14 +14,8 @@ import { FormFieldType } from "../forms/patientForm";
 import Image from "next/image";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { format } from "date-fns";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {
   Select,
   SelectContent,
@@ -65,6 +59,7 @@ function RenderField<TFieldValues extends FieldValues>({
     renderSkeleton,
     label,
     showTimeSelect,
+    dateFormat,
   } = props;
   switch (fieldtype) {
     case FormFieldType.INPUT:
@@ -103,51 +98,22 @@ function RenderField<TFieldValues extends FieldValues>({
       );
     case FormFieldType.DATA_PICKER:
       return (
-        <div className="mx-auto flex flex-row gap-4">
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                id="date-picker-simple"
-                className="rounded-md h-11! border border-solid border-dark-500 bg-dark-400! justify-start"
-              >
-                {field.value ? (
-                  format(field.value, "PPP")
-                ) : (
-                  <div className="flex items-center">
-                    <Image
-                      src="/assets/icons/calendar.svg"
-                      height={24}
-                      width={24}
-                      alt="celender"
-                      className="mr-2"
-                    />
-                    <span>pick a date</span>
-                  </div>
-                )}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
-              <Calendar
-                mode="single"
-                selected={field.value}
-                onSelect={(date) => field.onChange(date)}
-                defaultMonth={field.value}
-                className="bg-dark-400!"
-              />
-            </PopoverContent>
-          </Popover>
-          {showTimeSelect && (
-            <Field className="w-32">
-              <Input
-                type="time"
-                id="time-picker-optional"
-                step="1"
-                defaultValue="10:30:00"
-                className="appearance-none rounded-md h-11! border border-solid border-dark-500 bg-dark-400! [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
-              />
-            </Field>
-          )}
+        <div className="flex rounded-md border border-dark-500 bg-dark-400">
+          <Image
+            src="/assets/icons/calendar.svg"
+            height={24}
+            width={24}
+            alt="calendar"
+            className="ml-2"
+          />
+          <DatePicker
+            selected={field.value ? new Date(field.value) : undefined}
+            onChange={(date: Date | null) => field.onChange(date)}
+            dateFormat={dateFormat ?? "MM/dd/yyyy"}
+            showTimeSelect={showTimeSelect ?? false}
+            timeInputLabel="Time:"
+            wrapperClassName="date-picker"
+          />
         </div>
       );
     case FormFieldType.SKELETON:
