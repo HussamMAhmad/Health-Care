@@ -28,7 +28,6 @@ function PassKeyModel() {
   const path = usePathname();
   function closeModel() {
     setOpen(false);
-    router.refresh();
     router.push("/");
   }
   const encryptedKey =
@@ -39,7 +38,6 @@ function PassKeyModel() {
     if (path) {
       if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
         setOpen(false);
-        router.refresh();
         router.push("/admin");
       } else {
         setOpen(true);

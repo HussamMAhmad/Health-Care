@@ -47,7 +47,7 @@ export const columns = columnHelper.columns([
         (doc) => doc.name === row.original.primaryPhysician,
       );
       return (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mr-4">
           <Image
             src={doctor?.image || ""}
             alt={doctor?.name || ""}

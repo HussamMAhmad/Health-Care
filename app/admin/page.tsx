@@ -5,8 +5,12 @@ import { getAppointmentList } from "@/lib/actions/appointment.actions";
 import { DataTable } from "@/components/table/DataTable";
 import { columns } from "@/components/table/columns";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 async function Admin() {
   const appointmentsList = await getAppointmentList();
+  console.log(appointmentsList.rows);
   return (
     <div className="flex  w-full flex-col space-y-14 h-screen bg-dark-300">
       <header className="admin-header">
