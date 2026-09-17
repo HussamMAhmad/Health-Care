@@ -1,9 +1,10 @@
 "use server";
-import { tablesDB } from "../appwrite.config";
+import { tablesDB, messaging } from "../appwrite.config";
 import { DATABASE_ID, APPOINTMENT } from "../appwrite.config";
 import { ID, Query } from "node-appwrite";
 import { parseStringify } from "../utils";
 import { revalidatePath } from "next/cache";
+import { formatDateTime } from "../utils";
 
 export async function CreateAppointment(
   appointmentData: CreateAppointmentParams,
@@ -93,10 +94,33 @@ export async function updateAppointment({
     if (!result) {
       throw new Error("Appointment not found");
     }
-    // SMS notifaction
+
+    const emailMessage = `Hi, it's CarePulse. 
+    ${
+      type === "schedule"
+        ? `Your appointment has been ascheduled for ${formatDateTime(appointment.schedule).dateTime}
+         with Dr. ${appointment.primaryPhysician}`
+        : `we regret to inform you that your appontment has been cancelled. Reason :
+       ${appointment.cancellationReason} `
+    }`;
+    await sendEmail(emailMessage, userId);
     revalidatePath("./admin");
     return parseStringify(result);
   } catch (e) {
     console.error("failed to update the appointment", e);
   }
 }
+
+export const sendEmail = async (content: string, userId: string) => {
+  try {
+    const message = await messaging.createEmail({
+      messageId: ID.unique(),
+      subject: "Health Care",
+      content: content,
+      users: [userId],
+    });
+    return parseStringify(message);
+  } catch (e) {
+    console.log(e);
+  }
+};

@@ -40,7 +40,7 @@ function PatientForm() {
       if (user) router.push(`/patients/${user.$id}/register`);
       setIsLoading(false);
     } catch (e) {
-      console.log(e);
+      console.log(e); 
     }
   }
 
