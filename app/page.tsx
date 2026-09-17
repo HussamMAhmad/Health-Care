@@ -10,7 +10,7 @@ export default async function Home({
 }) {
   const isAdmin = (await searchParams)?.admin === "true";
   return (
-    <div className="flex h-screen">
+    <div className="flex min-h-screen">
       {isAdmin && (
         <PassKeyModel/>
       )}
