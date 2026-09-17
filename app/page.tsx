@@ -37,7 +37,7 @@ export default async function Home({
         alt="patient"
         width={1000}
         height={1000}
-        className=" h-full object-cover md:block hidden max-w-[50%]"
+        className=" h-screen object-cover md:block hidden max-w-[50%]"
       />
     </div>
   );

@@ -28,6 +28,7 @@ function PassKeyModel() {
   const path = usePathname();
   function closeModel() {
     setOpen(false);
+    router.refresh();
     router.push("/");
   }
   const encryptedKey =
@@ -38,6 +39,7 @@ function PassKeyModel() {
     if (path) {
       if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
         setOpen(false);
+        router.refresh();
         router.push("/admin");
       } else {
         setOpen(true);
@@ -72,7 +74,8 @@ function PassKeyModel() {
             />
           </AlertDialogTitle>
           <AlertDialogDescription>
-            to access the admin page , please enter the passkey which is (123456)
+            to access the admin page , please enter the passkey which is
+            (123456)
           </AlertDialogDescription>
           <div className="md:w-full">
             <InputOTP
