@@ -13,8 +13,8 @@ export default async function NewAppointment({
   Sentry.metrics.count("user_view_new-appointment", paitentId.name);
   Sentry.metrics.distribution("api_response_time", 150);
   return (
-    <div className="flex h-screen max-h-screen">
-      <section className="remove-scrollbar container my-auto">
+    <div className="flex min-h-screen">
+      <section className="container my-auto">
         <div className="sub-container max-w-[860px] flex-1 justify-between">
           <Image
             src="/assets/icons/logo-full.svg"
@@ -30,13 +30,6 @@ export default async function NewAppointment({
           />
         </div>
       </section>
-      <Image
-        src="/assets/images/appointment-img.png"
-        alt="patient"
-        width={1000}
-        height={1000}
-        className="side-img max-w-[400px] bg-bottom"
-      />
     </div>
   );
 }

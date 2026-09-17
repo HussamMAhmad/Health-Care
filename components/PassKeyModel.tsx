@@ -72,9 +72,9 @@ function PassKeyModel() {
             />
           </AlertDialogTitle>
           <AlertDialogDescription>
-            to access the admin page , please enter the passkey
+            to access the admin page , please enter the passkey which is (123456)
           </AlertDialogDescription>
-          <div className="w-full">
+          <div className="md:w-full">
             <InputOTP
               id="digits-only"
               maxLength={6}

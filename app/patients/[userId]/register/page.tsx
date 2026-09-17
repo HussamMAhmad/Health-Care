@@ -9,9 +9,10 @@ async function Register({ params }: { params: Promise<{ userId: string }> }) {
   const user = await getUser(userId);
   Sentry.metrics.count("user_view_register", user.name);
   Sentry.metrics.distribution("api_response_time", 150);
+
   return (
-    <div className="flex h-screen max-h-screen">
-      <section className="remove-scrollbar container overflow-y-auto">
+    <div className="flex justify-center min-h-scree relative md:w-[70%] w-full">
+      <section className="px-[20px] py-[20px] w-full">
         <div className="sub-container max-w-[860px] h-fit flex-col py-10 ">
           <Image
             src="/assets/icons/logo-full.svg"
@@ -28,7 +29,7 @@ async function Register({ params }: { params: Promise<{ userId: string }> }) {
         alt="patient"
         width={1000}
         height={1000}
-        className="side-img max-w-[390px] max-h-screen "
+        className="side-img max-w-[30%] max-h-screen "
       />
     </div>
   );

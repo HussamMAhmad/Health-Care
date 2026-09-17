@@ -41,7 +41,6 @@ export async function getUser(userid: string) {
     const result = await users.get({
       userId: userid,
     });
-    console.log(result);
     return parseStringify(result);
   } catch (e) {
     console.error("failed to fetch user ", e);

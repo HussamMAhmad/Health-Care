@@ -3,7 +3,7 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
- 
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -44,7 +44,7 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 }
- 
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -79,7 +79,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 }
- 
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -113,12 +113,12 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
- 
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
- 
+
   body {
     @apply bg-background text-foreground;
   }
@@ -210,11 +210,15 @@
 @utility container {
   margin-left: auto;
   margin-right: auto;
-  padding-left: 8rem;
-  padding-right: 8rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
 
   @media (min-width: 1400px) {
     max-width: 1400px;
+  }
+  @media (max-width: 768px) {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 
@@ -313,7 +317,7 @@
 }
 
 @utility side-img {
-  @apply hidden h-full object-cover md:block;
+  @apply h-full object-cover top-0 right-0 fixed max-md:hidden;
 }
 
 @utility copyright {
@@ -458,11 +462,11 @@
 }
 
 @utility shad-otp {
-  @apply !w-full !flex !justify-between;
+  @apply !w-full !flex !justify-between !gap-2;
 }
 
 @utility shad-otp-slot {
-  @apply text-36-bold !justify-center !flex !border !border-dark-500 !rounded-lg !size-16 !gap-4;
+  @apply text-36-bold !justify-center !flex !border !border-dark-500 !rounded-lg md:!size-16 !size-10;
 }
 
 @utility shad-alert-dialog {

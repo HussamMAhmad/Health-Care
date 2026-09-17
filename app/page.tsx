@@ -14,7 +14,7 @@ export default async function Home({
       {isAdmin && (
         <PassKeyModel/>
       )}
-      <section className="remove-scrollbar container my-auto">
+      <section className="container my-auto">
         <div>
           <Image
             src="/assets/icons/logo-full.svg"
@@ -37,7 +37,7 @@ export default async function Home({
         alt="patient"
         width={1000}
         height={1000}
-        className="side-img max-w-[50%]"
+        className=" h-full object-cover md:block hidden max-w-[50%]"
       />
     </div>
   );
