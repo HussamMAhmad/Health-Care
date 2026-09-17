@@ -22,7 +22,7 @@ async function Success({
   Sentry.metrics.count("user_view_new-appointment-success", user.name);
   Sentry.metrics.distribution("api_response_time", 150);
   return (
-    <div className="max-h-screen h-screen flex px-[5%]">
+    <div className="min-h-screen flex px-[5%]">
       <div className="success-img">
         <Link href="/">
           <Image
